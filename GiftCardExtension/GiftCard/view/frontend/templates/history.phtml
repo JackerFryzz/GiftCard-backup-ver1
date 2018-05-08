@@ -1,0 +1,41 @@
+
+<?php
+$data=$block->getDatabyId();
+?>
+<div class="block block-dashboard-orders">
+    <div class="block-title order">
+        		<strong>History</strong>
+	</div>
+    <div class="block-content">
+                <div class="table-wrapper orders-recent">
+            <table class="data table table-order-items recent" id="my-orders-table">
+                <caption class="table-caption">Recent Orders</caption>
+                <thead>
+
+                    <tr>
+
+                        <th scope="col" class="col date">Date</th>
+                        <th scope="col" class="col total">Code</th>
+                        <th scope="col" class="col status">Amount</th>
+                        <th scope="col" class="col actions">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+				<?php foreach ($data as $item){?>
+                         <tr>
+                            <td data-th="Order #" class="col id"><?php echo $block->fomatDate($item->getAction_time()); ?></td>
+                            <td data-th="Date" class="col date">
+                                <?php
+                                $giftcard_id=$item->getGiftcard_id();
+                                echo $block->getGiftCode($giftcard_id);
+                                ?>
+                            </td>
+                            <td data-th="Ship To" class="col shipping"><?php echo $block->fomatPrice($item->getAmount()) ; ?></td>
+                            <td data-th="Actions" class="col actions"><?php echo $item->getAction(); ?></td>
+                        </tr>
+				<?php }?>
+              </tbody>
+            </table>
+        </div>
+        </div>
+</div>

@@ -1,0 +1,48 @@
+<?php
+$resource=$block->getBalance();
+
+$customer_id=$block->getCustomerId();
+$config=$block->getConfig();
+
+?>
+
+<div class="block block-dashboard-info">
+    <div class="block-title"><strong><?php echo 'GiftCard Infomation' ?></strong></div>
+    <div class="block-content">
+        <div class="box box-information">
+            <strong class="box-title">
+                <span><?php  echo 'Balance' ?></span>
+            </strong>
+            <div class="box-content">
+                <p>
+					<?php echo $block->fomatPrice($resource->getGiftcard_balance());?>
+                </p>
+            </div>
+        </div>
+        <?php if ($config==1) {?>
+			<div class="box box-Redeem">
+                <strong class="box-title">
+                    <span><?php echo 'Redeem' ?></span>
+                </strong>
+                <div class="box-content">
+                  <form class="form subscribe" novalidate="novalidate" action="<?php echo $this->getUrl().'giftcardcode/Redeem/index'; ?>" method="post" id="newsletter-validate-detail">
+                    <div class="field newsletter">
+                        <div class="control">
+                            <input name="redeem" type="text" data-validate="{required:true}">
+                            <input name="customer_id" type="hidden" value="<?php echo $customer_id;?>">
+                            <input name="customer_balance" type="hidden" value="<?php echo $resource->getGiftcard_balance();?>">
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="action subscribe primary" title="Redeem" type="submit">
+                            <span>Redeem</span>
+                        </button>
+                    </div>
+                  </form>
+                </div>
+             </div>
+		<?php } ?>
+    </div>
+</div>
+
+
